@@ -1,0 +1,109 @@
+Mongodb Cheet Sheet 
+
+    ----> What is Mongodb ? 
+
+            -->MongoDB is an open-source database developed by MongoDB, MongoDB stores data in 
+        JSON-like documents that can vary in structure. It is a popular NoSQL database.
+
+//TODO: Database Commands
+
+    -> View all Database
+        --> show dbs
+
+    -> Create a new or switch Database
+        --> use dbName
+
+    -> View Current Database
+        --> db
+
+    -> Delete Database
+        --> db.dropDatabase()
+
+// TODO: Collection Commands
+
+    -> Show Collections
+        --> show collection
+
+    -> Create a Collection named " XYZ "
+        --> db.createCollection('XYZ')
+
+    -> Drop a Collection named ' XYZ '
+        --> db.XYZ.drop()
+
+// TODO: ROW ( Document ) Commands
+
+    -> Show All Rows in a Collection of XYZ
+        --> db.XYZ.find()
+
+    -> Show All Rows in a Collection of XYZ (Prettified)
+        --> db.XYZ.find().pretty()
+
+    -> Find the First row matching the object
+        --> db.XYZ.findOne({name: "ILYAS"})
+
+    //TODO: Insert Row in a Collection 'comments'
+
+   db.comments.insert({
+       'name': 'Ilyas',
+       'lang': 'javascript',
+       'empId': 'xi-001'
+   })
+
+   //TODO: Insert Many Rows in a Collection 'comments'
+
+   db.comments.insert([
+       {
+           'name' : 'Ilyas',
+           'lang' : 'javascript',
+           'empId' : 'xi-001'
+       },
+       {
+           'name' : 'Akshay',
+           'lang' : 'java',
+           'empId' : 'xi-002'
+       }
+   ])
+
+
+    ->Search in a Mongodb Database in a Collection 'comments'
+        --> db.comments.find({lang: 'java'})
+
+    -> Limit the number of rows in output
+        --> db.comments.find().limit(2)
+    
+    -> Count the number of rows in the output 
+        --> db.comments.find().count()
+
+    ->  Update a row
+        -->db.comments.update({name: 'Shubham'},
+        {'name': 'Harry',
+        'lang': 'JavaScript',
+        'member_since': 51
+        }, {upsert: true})
+        
+    -> Mongodb Increment Operator
+        -->db.comments.update({name: 'Rohan'},
+            {$inc:{
+                member_since: 2
+            }})
+
+    -> Mongodb Rename Operator
+        --> db.comments.update({name: 'Rohan'},
+                {$rename:{
+                    member_since: 'member'
+                }})
+
+    ->Delete Row 
+        --> db.comments.remove({name: 'Harry'})
+    
+    ->Less than/Greater than/ Less than or Eq/Greater than or Eq
+
+        --> db.comments.find({member_since: {$lt: 90}})
+
+        --> db.comments.find({member_since: {$lte: 90}})
+
+        --> db.comments.find({member_since: {$gt: 90}})
+
+        --> db.comments.find({member_since: {$gte: 90}})
+
+    
